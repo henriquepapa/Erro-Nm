@@ -43,6 +43,7 @@ def limpar_Marcacoes(file): # limpa o texto
     arq= [[]]
 
     txt=file.read()
+    #print(txt)
     raw = txt.split('[') # divide em frase
     #raw= sent_tokenize(txt)#divide o arquivo em frases  
     
@@ -80,8 +81,56 @@ def pre_Processamento(file):
 
     return linhas, discionario # retorna o texto limpo dividido em linhas e o discionario do palavras
 
-os.chdir('C:\\Users\\henri\\OneDrive\\Documentos\\corpus marcado\\C1')
 
+def sincroniza_Palavras(texto,discionario):
+    
+    texto_pronto = []
+    i_texto = 0
+    i_discionario = 0
+        
+    while(len(texto_pronto) < len(discionario)):
+    
+        if i_texto == 0: 
+            texto_pronto.append(texto[i_texto])
+            i_texto = i_texto+1
+
+        elif texto[i_texto] == discionario[i_discionario]:
+            texto_pronto.append(texto[i_texto])
+            i_texto = i_texto+1
+            i_discionario = i_discionario +1
+
+        elif texto[i_texto] != discionario[i_discionario] and i_texto != 0 :
+            texto_pronto[(len(texto_pronto)-1)]= texto_pronto[(len(texto_pronto)-1)] +'_'+texto[i_texto] 
+            i_texto = i_texto+1
+
+
+    return texto_pronto
+
+def preparaTexto(texto):
+    texto_palavras=[]
+    for frase in texto:
+        x = frase.replace('.', ' . ')
+        x = x.replace(',', ' , ')
+        texto_palavras.append((x.split(' ')))
+    for i in texto_palavras:
+        if '\n' in i:
+            i.remove('\n')
+        if '' in i:
+            i.remove('')
+    return texto_palavras
+
+def preparaDicionario(texto):
+    matriz=[]
+    lista= []
+    for palavra in texto:
+        if palavra == '.':
+            lista.append(palavra)
+            matriz.append((' '.join(lista)))
+            lista =[]
+        else:
+            lista.append(palavra)
+    
+    return matriz
 
 
 
