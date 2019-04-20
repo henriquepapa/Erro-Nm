@@ -23,7 +23,7 @@ def main():
 
         print(arq)
 
-    	#print('\n\n')
+        print('\n\n')
 
         texto, dicionario = pre_processamento.pre_Processamento(arq)
 
