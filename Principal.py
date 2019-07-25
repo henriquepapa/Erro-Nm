@@ -1,14 +1,12 @@
 import glob
 import os
 import ACR
-from nltk.tokenize import word_tokenize, sent_tokenize
-import pre_processamento
 import wikipedia
-import nltk
-import teste
-
-def main():
-
+import pre_processamento
+import parentese
+import nomes
+import re
+def main ():
     # direto de textos
     os.chdir('C:\\Users\\henri\\OneDrive\\Documentos\\GitHub\\Erro-Nm\\Textos')
 
@@ -17,24 +15,39 @@ def main():
     arquivos = file.read().split('\n')
 
     file.close()
-    valor =0
 
-    for arq in arquivos:
-
+    #for arq in arquivos:
+    arq = 'C11_erro_sumarizador1.txt'
+    if 1==1:
         print(arq)
 
-    	#print('\n\n')
+        print('\n\n')
 
         texto, dicionario = pre_processamento.pre_Processamento(arq)
+        
+        dicionario_valor = ';'.join(list (dicionario.values()))
+        print(dicionario_valor)
+        print('\n\n')
 
+        dicionario_keys = ';'.join(list (dicionario.keys()))
+        print(dicionario_keys)
+
+        print('\n\n')
+
+        print(dicionario)
+
+        #match = re.findall('[(][\w,\s]+[)]', dicionario_valor)
+
+
+
+
+'''
         lista=((teste.verifica_Parenteses(texto)))
 
         valor = valor + len(lista)
 
         print(lista)
-
-    print(valor)
-
+'''
     #quantidade_ACR,siglas = ACR.funcao_ACR(texto)
 
     #print ('foram encotradas : '+str(quantidade_ACR)+ ' siglas')

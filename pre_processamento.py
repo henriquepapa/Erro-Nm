@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 def lerXml(file): #le os arquivos no formato XML
 
-    with open(file, 'r') as xml_file: # Abre XML
+    with open(file, 'r',encoding= 'UTF-8') as xml_file: # Abre XML
         tree = ET.parse(xml_file)
         root = tree.getroot() # pega a raiz do arquivo
         
@@ -75,8 +75,8 @@ def pre_Processamento(file):
         os.chdir ("C:\\Users\\henri\\OneDrive\\Erro nM\\Textos XML\\Corpus\\C"+str(i))
 
         for arq in glob.glob("*.xml"):
-            if file.replace('.txt','_palavras.xml') == arq: # ve se o texto .txt corresponde com o XML
-                discionario = lerXml(file.replace('.txt','_palavras.xml')) # pega o XML correspondente
+            if file.replace('.txt','_Palavras.xml') == arq: # ve se o texto .txt corresponde com o XML
+                discionario = lerXml(file.replace('.txt','_Palavras.xml')) # pega o XML correspondente
             
 
     return linhas, discionario # retorna o texto limpo dividido em linhas e o discionario do palavras
@@ -105,33 +105,6 @@ def sincroniza_Palavras(texto,discionario):
 
 
     return texto_pronto
-
-def preparaTexto(texto):
-    texto_palavras=[]
-    for frase in texto:
-        x = frase.replace('.', ' . ')
-        x = x.replace(',', ' , ')
-        texto_palavras.append((x.split(' ')))
-    for i in texto_palavras:
-        if '\n' in i:
-            i.remove('\n')
-        if '' in i:
-            i.remove('')
-    return texto_palavras
-
-def preparaDicionario(texto):
-    matriz=[]
-    lista= []
-    for palavra in texto:
-        if palavra == '.':
-            lista.append(palavra)
-            matriz.append((' '.join(lista)))
-            lista =[]
-        else:
-            lista.append(palavra)
-    
-    return matriz
-
 
 
 
