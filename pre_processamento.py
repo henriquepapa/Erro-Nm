@@ -7,6 +7,7 @@ import re
 import csv
 import xml.etree.ElementTree as ET
 
+
 def lerXml(file): #le os arquivos no formato XML
 
     with open(file, 'r',encoding= 'UTF-8') as xml_file: # Abre XML
@@ -18,7 +19,13 @@ def lerXml(file): #le os arquivos no formato XML
     for t in root.iter('t'): 
         lista.append(t.attrib) # pega as palavras do texto
     for palavras in lista:
-        dicionario[palavras['word']] = palavras['pos'] # cria o discionario com as e sua analise
+        if '_' in palavras['word']:
+            significado = palavras['pos']
+            for divisao in palavras['word'].split('_'):
+                dicionario[divisao.lower()] = significado # cria o discionario com as palavras e sua analise
+        else:
+            dicionario[palavras['word'].lower()] = palavras['pos'] # cria o discionario com as palavras e sua analise
+
 
     return dicionario;
 
@@ -105,6 +112,28 @@ def sincroniza_Palavras(texto,discionario):
 
 
     return texto_pronto
+
+
+def Remove_stop_pu(Texto):
+    from nltk.corpus import stopwords
+    from string import punctuation
+
+
+    stopwords = set(stopwords.words('portuguese'))
+    pontuacacao =  list(punctuation)
+    pontuacacao.append('\n')
+    
+    texto_retorno = []
+    for frases in Texto:
+        frasesx = []
+        for palavras in frases.split(' '):
+            for retira in pontuacacao:
+                if retira in palavras:
+                    palavras = palavras.replace(retira, '')
+            if not(palavras in stopwords):
+                frasesx.append(palavras.lower())
+        texto_retorno.append(frasesx)
+    return texto_retorno
 
 
 

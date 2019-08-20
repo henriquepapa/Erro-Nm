@@ -6,6 +6,7 @@ import pre_processamento
 import parentese
 import nomes
 import re
+
 def main ():
     # direto de textos
     os.chdir('C:\\Users\\henri\\OneDrive\\Documentos\\GitHub\\Erro-Nm\\Textos')
@@ -13,18 +14,30 @@ def main ():
     file = open('treino.txt', 'r')  # textos as serem analisados
 
     arquivos = file.read().split('\n')
-
     file.close()
 
     #for arq in arquivos:
     arq = 'C11_erro_sumarizador1.txt'
     if 1==1:
-        print(arq)
+        lista_prop = []
+        print(arq) 
 
         print('\n\n')
 
         texto, dicionario = pre_processamento.pre_Processamento(arq)
+        print(pre_processamento.Remove_stop_pu(texto))
+        #print(dicionario)
+        for sentencas in texto:
+            for palavrax in sentencas.split(' '):
+                palavra_lower = palavrax.lower()
+                if palavra_lower in dicionario:
+                    if dicionario[(palavra_lower)] == 'prop':
+                    	#print(palavra_lower + ':  '+ dicionario[(palavra_lower)])
+                    	pass
         
+
+        
+        '''
         dicionario_valor = ';'.join(list (dicionario.values()))
         print(dicionario_valor)
         print('\n\n')
@@ -35,6 +48,7 @@ def main ():
         print('\n\n')
 
         print(dicionario)
+        '''
 
         #match = re.findall('[(][\w,\s]+[)]', dicionario_valor)
 
