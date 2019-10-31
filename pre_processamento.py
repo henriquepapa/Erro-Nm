@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 
 def lerXml(file): #le os arquivos no formato XML
 
-    with open(file, 'r',encoding= 'UTF-8') as xml_file: # Abre XML
+    with open(file, 'r',encoding= 'UTF-8',errors = 'ignore') as xml_file: # Abre XML
         tree = ET.parse(xml_file)
         root = tree.getroot() # pega a raiz do arquivo
         
@@ -44,8 +44,8 @@ def limpar_Marcacoes(file): # limpa o texto
         for file1 in glob.glob("*.txt"):
 
             if file == file1:
-
                 file= open(file,'r',encoding='UTF-8') # abre o arquivo
+                break
 
     arq= [[]]
 
@@ -53,16 +53,18 @@ def limpar_Marcacoes(file): # limpa o texto
     #print(txt)
     raw = txt.split('[') # divide em frase
     #raw= sent_tokenize(txt)#divide o arquivo em frases  
-    
+                
     for linha in raw:
         linha = CleanHTML(linha) # tira as marcações das frases
         if "S" in linha:
             linha = linha[linha.index("]")+1:].strip() 
             linha.replace('\n','')
-        arq.append (linha+'\n')
+            arq.append (linha+'\n')
 
+    
     arq.remove(arq[0]) # tira lixo das duas primeras posições
-    arq.remove(arq[0])
+
+    #print (arq)
 
     file.close()
 
@@ -131,7 +133,7 @@ def Remove_stop_pu(Texto):
                 if retira in palavras:
                     palavras = palavras.replace(retira, '')
             if not(palavras in stopwords):
-                frasesx.append(palavras.lower())
+                frasesx.append(palavras)#.lower()
         texto_retorno.append(frasesx)
     return texto_retorno
 

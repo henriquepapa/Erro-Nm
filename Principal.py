@@ -1,93 +1,97 @@
 import glob
 import os
-import ACR
-import wikipedia
+#import ACR
+#import wikipedia
 import pre_processamento
-import parentese
-import nomes
-import re
+#import parentese
+import Nm
+#import re
 
 def main ():
-    # direto de textos
-    os.chdir('C:\\Users\\henri\\OneDrive\\Documentos\\GitHub\\Erro-Nm\\Textos')
 
-    file = open('treino.txt', 'r')  # textos as serem analisados
+	# Debug
+	#import ipdb; ipdb.set_trace()
+	# direto de textos
+	os.chdir('C:\\Users\\henri\\OneDrive\\Documentos\\GitHub\\Erro-Nm\\Textos')
 
-    arquivos = file.read().split('\n')
-    file.close()
+	file = open('NM_Teste.txt', 'r')  # textos as serem analisados
 
-    #for arq in arquivos:
-    arq = 'C11_erro_sumarizador1.txt'
-    if 1==1:
-        lista_prop = []
-        print(arq) 
+	arquivos = file.read().split('\n')
+	file.close()
 
-        print('\n\n')
+	lista_arq = []
+	quantidade = 0
 
-        texto, dicionario = pre_processamento.pre_Processamento(arq)
-        print(pre_processamento.Remove_stop_pu(texto))
-        #print(dicionario)
-        for sentencas in texto:
-            for palavrax in sentencas.split(' '):
-                palavra_lower = palavrax.lower()
-                if palavra_lower in dicionario:
-                    if dicionario[(palavra_lower)] == 'prop':
-                    	#print(palavra_lower + ':  '+ dicionario[(palavra_lower)])
-                    	pass
-        
+	arquivos = ['C22_erro_sumarizador2.txt']
+	for arq in arquivos:
+	#arq = 'C14_erro_sumarizador2.txt'
+	#if 1==1:
+		
+		print(arq) 
 
-        
-        '''
-        dicionario_valor = ';'.join(list (dicionario.values()))
-        print(dicionario_valor)
-        print('\n\n')
+		print('\n\n')
 
-        dicionario_keys = ';'.join(list (dicionario.keys()))
-        print(dicionario_keys)
+		texto, dicionario = pre_processamento.pre_Processamento(arq)
+		frases = pre_processamento.Remove_stop_pu(texto)
+		#lista_prop = Nm.Buscafrases(frases,dicionario)
+		
+		Nm.similaridade(frases,'NM',texto)
 
-        print('\n\n')
-
-        print(dicionario)
-        '''
-
-        #match = re.findall('[(][\w,\s]+[)]', dicionario_valor)
+		
 
 
-
-
+		
 '''
-        lista=((teste.verifica_Parenteses(texto)))
+		dicionario_valor = ';'.join(list (dicionario.values()))
+		print(dicionario_valor)
+		print('\n\n')
 
-        valor = valor + len(lista)
+		dicionario_keys = ';'.join(list (dicionario.keys()))
+		print(dicionario_keys)
 
-        print(lista)
-'''
-    #quantidade_ACR,siglas = ACR.funcao_ACR(texto)
+		print('\n\n')
 
-    #print ('foram encotradas : '+str(quantidade_ACR)+ ' siglas')
+		print(dicionario)
+		
 
-    # for i in siglas :
-    # print(i)
-    #texto_palavaras = map(texto.remove('\n'),texto)
-
-    #texto_palavras = pre_processamento.preparaTexto(texto)
-
-    
-    	#print('\n\n')
-
-    	#print(dicionario)
+		#match = re.findall('[(][\w,\s]+[)]', dicionario_valor)
 
 
 
 
 
-    #print(texto_palavras)
+		lista=((teste.verifica_Parenteses(texto)))
 
-    #print(pre_processamento.sincroniza_Palavras(texto_palavras, (list(dicionario))))
+		valor = valor + len(lista)
+
+		print(lista)
+
+	#quantidade_ACR,siglas = ACR.funcao_ACR(texto)
+
+	#print ('foram encotradas : '+str(quantidade_ACR)+ ' siglas')
+
+	# for i in siglas :
+	# print(i)
+	#texto_palavaras = map(texto.remove('\n'),texto)
+
+	#texto_palavras = pre_processamento.preparaTexto(texto)
+
+	
+		#print('\n\n')
+
+		#print(dicionario)
+
+
+
+
+
+	#print(texto_palavras)
+
+	#print(pre_processamento.sincroniza_Palavras(texto_palavras, (list(dicionario))))
 
 	#------------ variavel globais para ACR-----------------------------------
 
-
+'''
 #-------------------------------------------------------------------------
 
 main()
